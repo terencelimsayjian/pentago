@@ -16,7 +16,7 @@
 .game-square {
   box-sizing: border-box;
   border: 1px solid green;
-  height: 50%;
-  width: 50%;
+  height: 33.33%;
+  width: 33.33%;
   float: left;
 }

@@ -1,22 +1,28 @@
-$('document').ready(function () {
+document.addEventListener('DOMContentLoaded', init)
+
+function init () {
   var gameBoard = [[], [], [], []]
-  // var arr = [0, 1, 1, 1, 2, 2]
-  // var arr1 = [1, 1, 2, 1, 1, 1]
-  // var arr2 = [2, 1, 1, 1, 1, 2]
-  // var arr3 = [1, 2, 1, 2, 1, 2]
+  var doubArr = [
+    [0, 1, 1, 1, 2, 2],
+    [1, 1, 2, 1, 1, 1],
+    [2, 1, 1, 1, 1, 2],
+    [1, 2, 1, 2, 1, 2],
+    [1, 2, 1, 2, 1, 2],
+    [1, 1, 2, 1, 1, 1]
+  ]
 
   var matchingValues = []
-  function horizontalWin (arr, index) {
+  function horizontalWin (arr, arrIndex, index) {
     matchingValues = []
     for (var i = index; i >= 0; i--) {
-      if (arr[i] === arr[index]) {
+      if (arr[arrIndex][i] === arr[arrIndex][index]) {
         matchingValues.push(arr[i])
       } else {
         break
       }
     }
     for (var j = index; j < arr.length; j++) {
-      if (arr[j] === arr[index]) {
+      if (arr[arrIndex][j] === arr[arrIndex][index]) {
         matchingValues.push(arr[j])
       } else {
         break
@@ -26,19 +32,11 @@ $('document').ready(function () {
     console.log(matchingValues.length - 1)
   }
 
-  // horizontalWin(arr, 2)
-  // horizontalWin(arr1, 1)
-  // horizontalWin(arr1, 5)
-  // horizontalWin(arr2, 3)
-  // horizontalWin(arr3, 3)
-  var doubArr = [
-          [0, 1, 1, 1, 2, 2],
-          [1, 1, 2, 1, 1, 1],
-          [2, 1, 1, 1, 1, 2],
-          [1, 2, 1, 2, 1, 2],
-          [1, 2, 1, 2, 1, 2],
-          [1, 1, 2, 1, 1, 1]
-  ]
+  // horizontalWin(doubArr, 0, 2)
+  // horizontalWin(doubArr, 1, 1)
+  // horizontalWin(doubArr, 5, 5)
+  // horizontalWin(doubArr, 2, 3)
+  // horizontalWin(doubArr, 3, 3)
 
   function verticalWin (arrOfArr, arrIndex, index) {
     matchingValues = []
@@ -65,6 +63,7 @@ $('document').ready(function () {
   // verticalWin(doubArr, 3, 5)
   // verticalWin(doubArr, 4, 4)
   // verticalWin(doubArr, 4, 3)
+
   function upwardDiagonalWin (arrOfArr, arrIndex, index) {
     var firstIndex = arrIndex
     var secondIndex = index
@@ -94,10 +93,10 @@ $('document').ready(function () {
     console.log(matchingValues.length - 1)
   }
 
-  upwardDiagonalWin(doubArr, 3, 2)
-  upwardDiagonalWin(doubArr, 3, 5)
-  upwardDiagonalWin(doubArr, 4, 4)
-  upwardDiagonalWin(doubArr, 4, 3)
+  // upwardDiagonalWin(doubArr, 3, 2)
+  // upwardDiagonalWin(doubArr, 3, 5)
+  // upwardDiagonalWin(doubArr, 4, 4)
+  // upwardDiagonalWin(doubArr, 4, 3)
 
   function downwardDiagonalWin (arrOfArr, arrIndex, index) {
     var firstIndex = arrIndex
@@ -128,8 +127,85 @@ $('document').ready(function () {
     console.log(matchingValues.length - 1)
   }
 
-  downwardDiagonalWin(doubArr, 3, 2)
-  downwardDiagonalWin(doubArr, 3, 5)
-  downwardDiagonalWin(doubArr, 4, 4)
-  downwardDiagonalWin(doubArr, 4, 3)
-})
+  // downwardDiagonalWin(doubArr, 3, 2)
+  // downwardDiagonalWin(doubArr, 3, 5)
+  // downwardDiagonalWin(doubArr, 4, 4)
+  // downwardDiagonalWin(doubArr, 4, 3)
+
+  // function rowColAdder (arrCounter, idxCounter) {
+  //   var arrayCounter = arrCounter
+  //   var indexCounter = idxCounter
+  //
+  //   return {
+  //     addArrCounter: function () {
+  //       this.setAttribute('row', arrayCounter)
+  //     }
+  //   //   addIndexCounter: function () {
+  //   //     this.setAttribute ('col,' indexCounter)
+  //   //   }
+  //   }
+  // }
+  //
+  // var gameSquareArr = document.querySelectorAll('.game-square')
+  //
+  // var firstRow = rowColAdder(0, 0)
+  //
+  // gameSquareArr.forEach(function (gsq) {
+  //   firstRow.addArrCounter()
+  // })
+  //
+  // console.log(gameSquareArr)
+
+  // for (var i = 0; i < gameBoard.length; i++) {
+  //   for (var j = 0; j < gameBoard[i].length; j++) {
+  //     gameSquareArr.setAttribute('row', i)
+  //     gameSquareArr.setAttribute('col', j)
+  //   }
+  // }
+
+  function addRowCol (row) {
+    var currentRow = row
+    function addCol (obj, col) {
+      obj.setAttribute('row', currentRow)
+      obj.setAttribute('col', col)
+    }
+    return addCol
+  }
+
+  var addRow0Col = addRowCol(0)
+  var addRow1Col = addRowCol(1)
+  var addRow2Col = addRowCol(2)
+  var addRow3Col = addRowCol(3)
+
+  var firstGameTile = document.querySelectorAll('#game-tile-1 .game-square')
+  var secondGameTile = document.querySelectorAll('#game-tile-2 .game-square')
+  var thirdGameTile = document.querySelectorAll('#game-tile-3 .game-square')
+  var fourthGameTile = document.querySelectorAll('#game-tile-4 .game-square')
+  var allGameTile = document.querySelectorAll('.game-square')
+
+  for (var i = 0; i < firstGameTile.length; i++) {
+    addRow0Col(firstGameTile[i], i)
+  }
+
+  for (var i = 0; i < secondGameTile.length; i++) {
+    addRow1Col(secondGameTile[i], i)
+  }
+
+  for (var i = 0; i < thirdGameTile.length; i++) {
+    addRow2Col(thirdGameTile[i], i)
+  }
+
+  for (var i = 0; i < fourthGameTile.length; i++) {
+    addRow3Col(fourthGameTile[i], i)
+  }
+
+  function playerMove() {
+    var thisRow = this.getAttribute('row')
+    var thisCol = this.getAttribute('col')
+    this.textContent = '[' + thisRow + ']' + '[' + thisCol + ']'
+  }
+
+  allGameTile.forEach (function (item) {
+    item.addEventListener('click', playerMove)
+  })
+}
