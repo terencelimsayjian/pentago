@@ -6,7 +6,6 @@ $('document').ready(function () {
   // var arr3 = [1, 2, 1, 2, 1, 2]
 
   var matchingValues = []
-  // Horizontal check: Get the element at index, and return all neighbouring elements that have the same value
   function horizontalWin (arr, index) {
     matchingValues = []
     for (var i = index; i >= 0; i--) {
@@ -41,17 +40,17 @@ $('document').ready(function () {
           [1, 1, 2, 1, 1, 1]
   ]
 
-  function verticalWin (arrOfArr, currArrIndex, index) {
+  function verticalWin (arrOfArr, arrIndex, index) {
     matchingValues = []
-    for (var i = currArrIndex; i >= 0; i--) {
-      if (arrOfArr[i][index] === arrOfArr[currArrIndex][index]) {
+    for (var i = arrIndex; i >= 0; i--) {
+      if (arrOfArr[i][index] === arrOfArr[arrIndex][index]) {
         matchingValues.push(arrOfArr[i][index])
       } else {
         break
       }
     }
-    for (var j = currArrIndex; j < arrOfArr.length; j++) {
-      if (arrOfArr[j][index] === arrOfArr[currArrIndex][index]) {
+    for (var j = arrIndex; j < arrOfArr.length; j++) {
+      if (arrOfArr[j][index] === arrOfArr[arrIndex][index]) {
         matchingValues.push(arrOfArr[j][index])
       } else {
         break
@@ -66,4 +65,71 @@ $('document').ready(function () {
   // verticalWin(doubArr, 3, 5)
   // verticalWin(doubArr, 4, 4)
   // verticalWin(doubArr, 4, 3)
+  function upwardDiagonalWin (arrOfArr, arrIndex, index) {
+    var firstIndex = arrIndex
+    var secondIndex = index
+    matchingValues = []
+    // Upward diagonal, moving right
+    for (var i = arrIndex; i >= 0; i--) {
+      if (arrOfArr[firstIndex][secondIndex] === arrOfArr[arrIndex][index]) {
+        matchingValues.push(arrOfArr[firstIndex][secondIndex])
+        firstIndex -= 1
+        secondIndex += 1
+      } else {
+        break
+      }
+    }
+    firstIndex = arrIndex
+    secondIndex = index
+    // Upward diagonal, moving left
+    for (var j = arrIndex; j < arrOfArr.length; j++) {
+      if (arrOfArr[firstIndex][secondIndex] === arrOfArr[arrIndex][index]) {
+        matchingValues.push(arrOfArr[firstIndex][secondIndex])
+        firstIndex += 1
+        secondIndex -= 1
+      } else {
+        break
+      }
+    }
+    console.log(matchingValues.length - 1)
+  }
+
+  upwardDiagonalWin(doubArr, 3, 2)
+  upwardDiagonalWin(doubArr, 3, 5)
+  upwardDiagonalWin(doubArr, 4, 4)
+  upwardDiagonalWin(doubArr, 4, 3)
+
+  function downwardDiagonalWin (arrOfArr, arrIndex, index) {
+    var firstIndex = arrIndex
+    var secondIndex = index
+    matchingValues = []
+    // Downward diagonal, moving right
+    for (var i = arrIndex; i < arrOfArr.length; i++) {
+      if (arrOfArr[firstIndex][secondIndex] === arrOfArr[arrIndex][index]) {
+        matchingValues.push(arrOfArr[firstIndex][secondIndex])
+        firstIndex += 1
+        secondIndex += 1
+      } else {
+        break
+      }
+    }
+    firstIndex = arrIndex
+    secondIndex = index
+    // Downward diagonal, moving left
+    for (var j = arrIndex; j >= 0; j--) {
+      if (arrOfArr[firstIndex][secondIndex] === arrOfArr[arrIndex][index]) {
+        matchingValues.push(arrOfArr[firstIndex][secondIndex])
+        firstIndex -= 1
+        secondIndex -= 1
+      } else {
+        break
+      }
+    }
+    console.log(matchingValues.length - 1)
+  }
+
+  downwardDiagonalWin(doubArr, 3, 2)
+  downwardDiagonalWin(doubArr, 3, 5)
+  downwardDiagonalWin(doubArr, 4, 4)
+  downwardDiagonalWin(doubArr, 4, 3)
 })
