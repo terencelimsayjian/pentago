@@ -132,37 +132,6 @@ function init () {
   // downwardDiagonalWin(doubArr, 4, 4)
   // downwardDiagonalWin(doubArr, 4, 3)
 
-  // function rowColAdder (arrCounter, idxCounter) {
-  //   var arrayCounter = arrCounter
-  //   var indexCounter = idxCounter
-  //
-  //   return {
-  //     addArrCounter: function () {
-  //       this.setAttribute('row', arrayCounter)
-  //     }
-  //   //   addIndexCounter: function () {
-  //   //     this.setAttribute ('col,' indexCounter)
-  //   //   }
-  //   }
-  // }
-  //
-  // var gameSquareArr = document.querySelectorAll('.game-square')
-  //
-  // var firstRow = rowColAdder(0, 0)
-  //
-  // gameSquareArr.forEach(function (gsq) {
-  //   firstRow.addArrCounter()
-  // })
-  //
-  // console.log(gameSquareArr)
-
-  // for (var i = 0; i < gameBoard.length; i++) {
-  //   for (var j = 0; j < gameBoard[i].length; j++) {
-  //     gameSquareArr.setAttribute('row', i)
-  //     gameSquareArr.setAttribute('col', j)
-  //   }
-  // }
-
   function addRowCol (row) {
     var currentRow = row
     function addCol (obj, col) {
@@ -181,7 +150,8 @@ function init () {
   var secondGameTile = document.querySelectorAll('#game-tile-2 .game-square')
   var thirdGameTile = document.querySelectorAll('#game-tile-3 .game-square')
   var fourthGameTile = document.querySelectorAll('#game-tile-4 .game-square')
-  var allGameTile = document.querySelectorAll('.game-square')
+  var allGameSquare = document.querySelectorAll('.game-square')
+  var allGameTile = document.querySelectorAll('.game-tile')
 
   for (var i = 0; i < firstGameTile.length; i++) {
     addRow0Col(firstGameTile[i], i)
@@ -203,9 +173,12 @@ function init () {
     var thisRow = this.getAttribute('row')
     var thisCol = this.getAttribute('col')
     this.textContent = '[' + thisRow + ']' + '[' + thisCol + ']'
+    gameBoard[thisRow][thisCol] = 'x'
+    console.log(gameBoard)
   }
 
-  allGameTile.forEach (function (item) {
+  allGameSquare.forEach (function (item) {
     item.addEventListener('click', playerMove)
   })
+
 }
