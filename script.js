@@ -1,184 +1,109 @@
-document.addEventListener('DOMContentLoaded', init)
-
-function init () {
-  var gameBoard = [[], [], [], []]
-  var doubArr = [
-    [0, 1, 1, 1, 2, 2],
-    [1, 1, 2, 1, 1, 1],
-    [2, 1, 1, 1, 1, 2],
-    [1, 2, 1, 2, 1, 2],
-    [1, 2, 1, 2, 1, 2],
-    [1, 1, 2, 1, 1, 1]
+$(document).ready(function () {
+  var gameBoard = [
+                    ['a1', 'a2', 'a3', 'a4', 'a5', 'a6'],
+                    ['b1', 'b2', 'b3', 'b4', 'b5', 'b6'],
+                    ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'],
+                    ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'],
+                    ['e1', 'e2', 'e3', 'e4', 'e5', 'e6'],
+                    ['f1', 'f2', 'f3', 'f4', 'f5', 'f6']
   ]
 
+  var adjustFirstArr = 0
+  var adjustSecondArr = 0
+
+  function getDirectionIndex (direction) {
+    switch (direction) {
+      case 'vertical':
+        adjustFirstArr = -1
+        adjustSecondArr = 0
+        break
+      case 'horizontal':
+        adjustFirstArr = 0
+        adjustSecondArr = 1
+        break
+      case 'upDiagonal':
+        adjustFirstArr = -1
+        adjustSecondArr = 1
+        break
+      case 'downDiagonal':
+        adjustFirstArr = -1
+        adjustSecondArr = -1
+        break
+      default:
+        adjustFirstArr = 0
+        adjustSecondArr = 0
+    }
+  }
+
+  var doubArr = [
+  [0, 1, 1, 1, 2, 2],
+  [1, 1, 2, 1, 1, 1],
+  [2, 1, 1, 1, 1, 2],
+  [1, 2, 1, 2, 1, 2],
+  [1, 2, 1, 2, 1, 2],
+  [1, 1, 2, 1, 1, 1]
+  ]
+
+  checkWin (gameBoard, 1, 0, 'vertical')
+
   var matchingValues = []
-  function horizontalWin (arr, arrIndex, index) {
+
+  function checkWin (arr, rowIndex, colIndex, direction) {
+    getDirectionIndex(direction)
+    var playerMove = arr[rowIndex][colIndex]
+
+    var checkRowFront = rowIndex + adjustFirstArr
+    var checkColFront = colIndex + adjustSecondArr
+
+    var checkRowBack = rowIndex - adjustFirstArr
+    var checkColBack = colIndex - adjustSecondArr
+
+    var totalMatches = 0
     matchingValues = []
-    for (var i = index; i >= 0; i--) {
-      if (arr[arrIndex][i] === arr[arrIndex][index]) {
-        matchingValues.push(arr[i])
-      } else {
-        break
-      }
+
+    while (arr[checkRowFront][checkColFront] === playerMove) {
+      // console.log('[' + checkRowFront + '][' + checkColFront + ']')
+      checkRowFront += adjustFirstArr
+      checkColFront += adjustSecondArr
+      totalMatches += 1
     }
-    for (var j = index; j < arr.length; j++) {
-      if (arr[arrIndex][j] === arr[arrIndex][index]) {
-        matchingValues.push(arr[j])
-      } else {
-        break
-      }
+
+    while (arr[checkRowBack][checkColBack] === playerMove) {
+      // console.log('[' + checkRowBack + '][' + checkColBack + ']')
+      checkRowBack -= adjustFirstArr
+      checkColBack -= adjustSecondArr
+      totalMatches += 1
     }
-    // REMEMBER: Double counts the index
-    console.log(matchingValues.length - 1)
+    if (totalMatches === 4) {
+      console.log('u r a ' + direction + ' winna')
+    }
   }
 
-  // horizontalWin(doubArr, 0, 2)
-  // horizontalWin(doubArr, 1, 1)
-  // horizontalWin(doubArr, 5, 5)
-  // horizontalWin(doubArr, 2, 3)
-  // horizontalWin(doubArr, 3, 3)
+// HAMANAHAMANAHAMANA
 
-  function verticalWin (arrOfArr, arrIndex, index) {
-    matchingValues = []
-    for (var i = arrIndex; i >= 0; i--) {
-      if (arrOfArr[i][index] === arrOfArr[arrIndex][index]) {
-        matchingValues.push(arrOfArr[i][index])
-      } else {
-        break
-      }
-    }
-    for (var j = arrIndex; j < arrOfArr.length; j++) {
-      if (arrOfArr[j][index] === arrOfArr[arrIndex][index]) {
-        matchingValues.push(arrOfArr[j][index])
-      } else {
-        break
-      }
-    }
-    // REMEMBER: Double counts the index
-    console.log(matchingValues.length - 1)
-  }
+  var $allGameSquare = $('.game-square')
+  var $headerTwo = $('h2')
+  var player = 'X'
 
-  // verticalWin(doubArr, 2, 2)
-  // verticalWin(doubArr, 3, 2)
-  // verticalWin(doubArr, 3, 5)
-  // verticalWin(doubArr, 4, 4)
-  // verticalWin(doubArr, 4, 3)
-
-  function upwardDiagonalWin (arrOfArr, arrIndex, index) {
-    var firstIndex = arrIndex
-    var secondIndex = index
-    matchingValues = []
-    // Upward diagonal, moving right
-    for (var i = arrIndex; i >= 0; i--) {
-      if (arrOfArr[firstIndex][secondIndex] === arrOfArr[arrIndex][index]) {
-        matchingValues.push(arrOfArr[firstIndex][secondIndex])
-        firstIndex -= 1
-        secondIndex += 1
-      } else {
-        break
-      }
-    }
-    firstIndex = arrIndex
-    secondIndex = index
-    // Upward diagonal, moving left
-    for (var j = arrIndex; j < arrOfArr.length; j++) {
-      if (arrOfArr[firstIndex][secondIndex] === arrOfArr[arrIndex][index]) {
-        matchingValues.push(arrOfArr[firstIndex][secondIndex])
-        firstIndex += 1
-        secondIndex -= 1
-      } else {
-        break
-      }
-    }
-    console.log(matchingValues.length - 1)
-  }
-
-  // upwardDiagonalWin(doubArr, 3, 2)
-  // upwardDiagonalWin(doubArr, 3, 5)
-  // upwardDiagonalWin(doubArr, 4, 4)
-  // upwardDiagonalWin(doubArr, 4, 3)
-
-  function downwardDiagonalWin (arrOfArr, arrIndex, index) {
-    var firstIndex = arrIndex
-    var secondIndex = index
-    matchingValues = []
-    // Downward diagonal, moving right
-    for (var i = arrIndex; i < arrOfArr.length; i++) {
-      if (arrOfArr[firstIndex][secondIndex] === arrOfArr[arrIndex][index]) {
-        matchingValues.push(arrOfArr[firstIndex][secondIndex])
-        firstIndex += 1
-        secondIndex += 1
-      } else {
-        break
-      }
-    }
-    firstIndex = arrIndex
-    secondIndex = index
-    // Downward diagonal, moving left
-    for (var j = arrIndex; j >= 0; j--) {
-      if (arrOfArr[firstIndex][secondIndex] === arrOfArr[arrIndex][index]) {
-        matchingValues.push(arrOfArr[firstIndex][secondIndex])
-        firstIndex -= 1
-        secondIndex -= 1
-      } else {
-        break
-      }
-    }
-    console.log(matchingValues.length - 1)
-  }
-
-  // downwardDiagonalWin(doubArr, 3, 2)
-  // downwardDiagonalWin(doubArr, 3, 5)
-  // downwardDiagonalWin(doubArr, 4, 4)
-  // downwardDiagonalWin(doubArr, 4, 3)
-
-  function addRowCol (row) {
-    var currentRow = row
-    function addCol (obj, col) {
-      obj.setAttribute('row', currentRow)
-      obj.setAttribute('col', col)
-    }
-    return addCol
-  }
-
-  var addRow0Col = addRowCol(0)
-  var addRow1Col = addRowCol(1)
-  var addRow2Col = addRowCol(2)
-  var addRow3Col = addRowCol(3)
-
-  var firstGameTile = document.querySelectorAll('#game-tile-1 .game-square')
-  var secondGameTile = document.querySelectorAll('#game-tile-2 .game-square')
-  var thirdGameTile = document.querySelectorAll('#game-tile-3 .game-square')
-  var fourthGameTile = document.querySelectorAll('#game-tile-4 .game-square')
-  var allGameSquare = document.querySelectorAll('.game-square')
-  var allGameTile = document.querySelectorAll('.game-tile')
-
-  for (var i = 0; i < firstGameTile.length; i++) {
-    addRow0Col(firstGameTile[i], i)
-  }
-
-  for (var i = 0; i < secondGameTile.length; i++) {
-    addRow1Col(secondGameTile[i], i)
-  }
-
-  for (var i = 0; i < thirdGameTile.length; i++) {
-    addRow2Col(thirdGameTile[i], i)
-  }
-
-  for (var i = 0; i < fourthGameTile.length; i++) {
-    addRow3Col(fourthGameTile[i], i)
-  }
-
-  function playerMove() {
+  function playerMove () {
     var thisRow = this.getAttribute('row')
     var thisCol = this.getAttribute('col')
-    this.textContent = '[' + thisRow + ']' + '[' + thisCol + ']'
-    gameBoard[thisRow][thisCol] = 'x'
-    console.log(gameBoard)
+    gameBoard[thisRow][thisCol] = player
+    this.textContent = player + '[' + thisRow + ']' + '[' + thisCol + ']'
+    // console.log('[' + thisRow + ']' + '[' + thisCol + ']')
+    checkWin(gameBoard, thisRow, thisCol, 'vertical')
+    // checkWin(gameBoard, thisRow, thisCol, 'horizontal')
+    // checkWin(gameBoard, thisRow, thisCol, 'upDiagonal')
+    // checkWin(gameBoard, thisRow, thisCol, 'downDiagonal')
+
+    if (player === 'X') {
+      player = 'O'
+    } else {
+      player = 'X'
+    }
+    // console.log(gameBoard)
   }
 
-  allGameSquare.forEach (function (item) {
-    item.addEventListener('click', playerMove)
-  })
+  $allGameSquare.on('click', playerMove)
 
-}
+})
