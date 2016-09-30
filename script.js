@@ -44,39 +44,62 @@ $(document).ready(function () {
   [1, 1, 2, 1, 1, 1]
   ]
 
-  checkWin (gameBoard, 1, 0, 'vertical')
-
   var matchingValues = []
 
   function checkWin (arr, rowIndex, colIndex, direction) {
     getDirectionIndex(direction)
     var playerMove = arr[rowIndex][colIndex]
 
-    var checkRowFront = rowIndex + adjustFirstArr
-    var checkColFront = colIndex + adjustSecondArr
+    var checkRowFront = rowIndex
+    //  + adjustFirstArr
+    var checkColFront = colIndex
+    //  + adjustSecondArr
 
-    var checkRowBack = rowIndex - adjustFirstArr
-    var checkColBack = colIndex - adjustSecondArr
+    var checkRowBack = rowIndex
+    //  - adjustFirstArr
+    var checkColBack = colIndex
+    //  - adjustSecondArr
 
-    var totalMatches = 0
+    var totalMatches = -1
     matchingValues = []
 
-    while (arr[checkRowFront][checkColFront] === playerMove) {
-      // console.log('[' + checkRowFront + '][' + checkColFront + ']')
-      checkRowFront += adjustFirstArr
-      checkColFront += adjustSecondArr
-      totalMatches += 1
+    for (var i = 0; i < 6; i++) {
+      if (checkRowFront >= 0 && checkColFront >= 0) {
+        if (arr[checkRowFront][checkColFront] === playerMove) {
+          checkRowFront += adjustFirstArr
+          checkColFront += adjustSecondArr
+          totalMatches += 1
+        } else {
+          break
+        }
+      } else {
+        break
+      }
     }
 
-    while (arr[checkRowBack][checkColBack] === playerMove) {
-      // console.log('[' + checkRowBack + '][' + checkColBack + ']')
-      checkRowBack -= adjustFirstArr
-      checkColBack -= adjustSecondArr
-      totalMatches += 1
+    for (var i = 0; i < 6; i++) {
+      if (checkRowBack <= 5 && checkColBack <= 5) {
+        if (arr[checkRowBack][checkColBack] === playerMove) {
+          checkRowBack -= adjustFirstArr
+          checkColBack -= adjustSecondArr
+          totalMatches += 1
+        } else {
+          break
+        }
+      } else {
+        break
+      }
     }
-    if (totalMatches === 4) {
-      console.log('u r a ' + direction + ' winna')
-    }
+
+    // while (arr[checkRowBack][checkColBack] === playerMove && checkRowBack >= 0 && checkColBack >= 0) {
+    //   // console.log('[' + checkRowBack + '][' + checkColBack + ']')
+    //   checkRowBack -= adjustFirstArr
+    //   checkColBack -= adjustSecondArr
+    //   totalMatches += 1
+    // //  When you check it in relation to itself, both loops return one each hence first value is 2. Double counting error
+    // //  But if the search is performed in one direciton, only one loop runs which fucks up the double counting again
+    // }
+    console.log(totalMatches)
   }
 
 // HAMANAHAMANAHAMANA
@@ -86,11 +109,12 @@ $(document).ready(function () {
   var player = 'X'
 
   function playerMove () {
-    var thisRow = this.getAttribute('row')
-    var thisCol = this.getAttribute('col')
+    var thisRow = Number(this.getAttribute('row'))
+    var thisCol = Number(this.getAttribute('col'))
     gameBoard[thisRow][thisCol] = player
     this.textContent = player + '[' + thisRow + ']' + '[' + thisCol + ']'
     // console.log('[' + thisRow + ']' + '[' + thisCol + ']')
+
     checkWin(gameBoard, thisRow, thisCol, 'vertical')
     // checkWin(gameBoard, thisRow, thisCol, 'horizontal')
     // checkWin(gameBoard, thisRow, thisCol, 'upDiagonal')
