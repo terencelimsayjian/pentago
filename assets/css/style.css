@@ -3,6 +3,11 @@ h1, h2 {
   font-size: 40px
 }
 
+button {
+  display: block;
+  margin: 0 auto;
+}
+
 .game-board {
   height: 600px;
   width: 600px;
@@ -27,4 +32,15 @@ h1, h2 {
   font-size: 80px;
   font-weight: bold;
   text-align: center;
+}
+
+.red {
+  background-image: url('http://i.dailymail.co.uk/i/pix/2016/03/29/17/32A492F000000578-3514284-The_new_planet_has_been_compared_to_Mustafar_the_scorching_lava_-a-41_1459269452422.jpg');
+  background-size: cover;
+
+}
+
+.blue {
+  background-image: url('http://blogs-images.forbes.com/jillianscudder/files/2016/03/imageneptune_full.jpg');
+  background-size: cover;
 }
