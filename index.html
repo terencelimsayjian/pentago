@@ -9,64 +9,92 @@
     <h1>Pentago</h1>
     <div class="game-space">
 
+    <div class="top-btn-container">
+      <div class="rotate-btn top-btn" id="rotate-right0">Rotate B0 Right</br> > > ></div>
+      <div class="rotate-btn top-btn" id="rotate-left1">Rotate B1 Left</br>< < <</div>
+    </div>
 
-    <button class="rotate-right">Rotate B0 Right</button>
-    <button class="rotate-right">Rotate B1 Right</button>
-    <button class="rotate-right">Rotate B2 Right</button>
-    <button class="rotate-right">Rotate B3 Right</button>
-    <button class="rotate-left">Rotate B0 Left</button>
-    <button class="rotate-left">Rotate B1 Left</button>
-    <button class="rotate-left">Rotate B2 Left</button>
-    <button class="rotate-left">Rotate B3 Left</button>
-      <div class="game-board">
-        <div class="game-tile" id="game-tile-0">
-          <div class="game-square" data-row="0" data-col="0"></div>
-          <div class="game-square" data-row="0" data-col="1"></div>
-          <div class="game-square" data-row="0" data-col="2"></div>
-          <div class="game-square" data-row="1" data-col="0"></div>
-          <div class="game-square" data-row="1" data-col="1"></div>
-          <div class="game-square" data-row="1" data-col="2"></div>
-          <div class="game-square" data-row="2" data-col="0"></div>
-          <div class="game-square" data-row="2" data-col="1"></div>
-          <div class="game-square" data-row="2" data-col="2"></div>
+    <div class="left-btn-container">
+      <div class="rotate-btn left-btn" id="rotate-left0">Rotate B0 Left</br>\/</br>\/</br>\/</div>
+      <div class="rotate-btn left-btn" id="rotate-right2">/\</br>/\</br>/\</br>Rotate B2 Right</div>
+    </div>
+
+        <div class="game-board">
+          <div class="game-tile" id="game-tile-0">
+            <div class="game-square" data-row="0" data-col="0"></div>
+            <div class="game-square" data-row="0" data-col="1"></div>
+            <div class="game-square" data-row="0" data-col="2"></div>
+            <div class="game-square" data-row="1" data-col="0"></div>
+            <div class="game-square" data-row="1" data-col="1"></div>
+            <div class="game-square" data-row="1" data-col="2"></div>
+            <div class="game-square" data-row="2" data-col="0"></div>
+            <div class="game-square" data-row="2" data-col="1"></div>
+            <div class="game-square" data-row="2" data-col="2"></div>
+          </div>
+          <div class="game-tile" id="game-tile-1">
+            <div class="game-square" data-row="0" data-col="3"></div>
+            <div class="game-square" data-row="0" data-col="4"></div>
+            <div class="game-square" data-row="0" data-col="5"></div>
+            <div class="game-square" data-row="1" data-col="3"></div>
+            <div class="game-square" data-row="1" data-col="4"></div>
+            <div class="game-square" data-row="1" data-col="5"></div>
+            <div class="game-square" data-row="2" data-col="3"></div>
+            <div class="game-square" data-row="2" data-col="4"></div>
+            <div class="game-square" data-row="2" data-col="5"></div>
+          </div>
+          <div class="game-tile" id="game-tile-2">
+            <div class="game-square" data-row="3" data-col="0"></div>
+            <div class="game-square" data-row="3" data-col="1"></div>
+            <div class="game-square" data-row="3" data-col="2"></div>
+            <div class="game-square" data-row="4" data-col="0"></div>
+            <div class="game-square" data-row="4" data-col="1"></div>
+            <div class="game-square" data-row="4" data-col="2"></div>
+            <div class="game-square" data-row="5" data-col="0"></div>
+            <div class="game-square" data-row="5" data-col="1"></div>
+            <div class="game-square" data-row="5" data-col="2"></div>
+          </div>
+          <div class="game-tile" id="game-tile-3">
+            <div class="game-square" data-row="3" data-col="3"></div>
+            <div class="game-square" data-row="3" data-col="4"></div>
+            <div class="game-square" data-row="3" data-col="5"></div>
+            <div class="game-square" data-row="4" data-col="3"></div>
+            <div class="game-square" data-row="4" data-col="4"></div>
+            <div class="game-square" data-row="4" data-col="5"></div>
+            <div class="game-square" data-row="5" data-col="3"></div>
+            <div class="game-square" data-row="5" data-col="4"></div>
+            <div class="game-square" data-row="5" data-col="5"></div>
+          </div>
         </div>
-        <div class="game-tile" id="game-tile-1">
-          <div class="game-square" data-row="0" data-col="3"></div>
-          <div class="game-square" data-row="0" data-col="4"></div>
-          <div class="game-square" data-row="0" data-col="5"></div>
-          <div class="game-square" data-row="1" data-col="3"></div>
-          <div class="game-square" data-row="1" data-col="4"></div>
-          <div class="game-square" data-row="1" data-col="5"></div>
-          <div class="game-square" data-row="2" data-col="3"></div>
-          <div class="game-square" data-row="2" data-col="4"></div>
-          <div class="game-square" data-row="2" data-col="5"></div>
+
+        <div class="right-btn-container">
+          <div class="rotate-btn right-btn" id="rotate-right1">Rotate B1 Right</br>\/</br>\/</br>\/</div>
+          <div class="rotate-btn right-btn" id="rotate-left3">/\</br>/\</br>/\</br>Rotate B3 Left</div>
         </div>
-        <div class="game-tile" id="game-tile-2">
-          <div class="game-square" data-row="3" data-col="0"></div>
-          <div class="game-square" data-row="3" data-col="1"></div>
-          <div class="game-square" data-row="3" data-col="2"></div>
-          <div class="game-square" data-row="4" data-col="0"></div>
-          <div class="game-square" data-row="4" data-col="1"></div>
-          <div class="game-square" data-row="4" data-col="2"></div>
-          <div class="game-square" data-row="5" data-col="0"></div>
-          <div class="game-square" data-row="5" data-col="1"></div>
-          <div class="game-square" data-row="5" data-col="2"></div>
+
+        <div class="bottom-btn-container">
+          <div class="rotate-btn bottom-btn" id="rotate-right3">Rotate B3 Right</br>< < <</div>
+          <div class="rotate-btn bottom-btn" id="rotate-left2">Rotate B2 Left</br>> > ></div>
         </div>
-        <div class="game-tile" id="game-tile-3">
-          <div class="game-square" data-row="3" data-col="3"></div>
-          <div class="game-square" data-row="3" data-col="4"></div>
-          <div class="game-square" data-row="3" data-col="5"></div>
-          <div class="game-square" data-row="4" data-col="3"></div>
-          <div class="game-square" data-row="4" data-col="4"></div>
-          <div class="game-square" data-row="4" data-col="5"></div>
-          <div class="game-square" data-row="5" data-col="3"></div>
-          <div class="game-square" data-row="5" data-col="4"></div>
-          <div class="game-square" data-row="5" data-col="5"></div>
-        </div>
-      </div>
     </div>
 
     <h2>Sup</h2>
+
+    <div class="scoreboard">
+      <div class="score-container">
+        <h3>Player 1</h3>
+        <p class="player-x-score">0</p>
+      </div>
+      <div class="score-container">
+        <h3>Ties</h3>
+        <p class="tie-score">0</p>
+      </div>
+      <div class="score-container">
+        <h3>Player 2</h3>
+        <p class="player-o-score">0</p>
+      </div>
+    </div>
+
+    <div class="reset-btn">Reset</div>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
     <script src="script.js"></script>
