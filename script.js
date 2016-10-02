@@ -8,20 +8,84 @@ $(document).ready(function () {
                     ['', '', '', '', '', '']
   ]
 
+  var player = 'X'
 
   var $allGameSquare = $('.game-square')
-  var $headerTwo = $('h2')
-  var player = 'X'
   var scoreBoard = {
     'X': 0,
     'O': 0,
-    'ties': 0
+    'ties': 0,
+    'Xset': false,
+    'Oset': false,
+    'roundEnd': true,
+    'initiator': 'X',
+    'winner': ''
   }
 
-  // Have a game init function instead for clarity?
-  $('.rotate-btn').hide()
+  gameBoardInit()
 
-  // checks win condition with tile coordinates and direction specified
+  $('.reset-btn').on('click', fullReset)
+
+  $('.next-game-btn').on('click', gameBoardInit)
+
+  function gameBoardInit () {
+    $allGameSquare.removeClass('X')
+    $allGameSquare.removeClass('O')
+    gameBoard = [
+                      ['', '', '', '', '', ''],
+                      ['', '', '', '', '', ''],
+                      ['', '', '', '', '', ''],
+                      ['', '', '', '', '', ''],
+                      ['', '', '', '', '', ''],
+                      ['', '', '', '', '', '']
+    ]
+    scoreBoard.roundEnd = false
+    prepMoveA()
+    scoreBoard.Xset = false
+    scoreBoard.Oset = false
+  }
+
+  function updateTurnMessage (input) {
+    if (player === 'X') {
+      $('.alert-message').text("Player 1's turn")
+    } else if (player === 'O') {
+      $('.alert-message').text("Player 2's turn")
+    }
+  }
+
+  // For each game-tile that is not populated with value, add event listener
+  function prepMoveA () {
+    $('.rotate-btn').hide()
+    updateTurnMessage()
+    for (var i = 0; i < $allGameSquare.length; i++) {
+      var $gameSquare = $('.game-square').eq(i)
+      if (!$gameSquare.hasClass('X') && !$gameSquare.hasClass('O')) {
+        $gameSquare.on('click', playerMove)
+        $gameSquare.hover(
+          function () {
+            $(this).addClass('hover' + player)
+          },
+          function () {
+            $(this).removeClass('hoverX hoverO')
+          }
+        )
+      }
+    }
+  }
+
+  function prepMoveB () {
+    $allGameSquare.off()
+    $allGameSquare.removeClass('hoverX hoverO')
+    $('.rotate-btn').show()
+  }
+
+  function freezeFrame () {
+    $allGameSquare.off()
+    $('.rotate-btn').hide()
+    $('.alert-message h1').text(scoreBoard.winner)
+  }
+
+  // Checks win condition for a particular tile with direction and coordinates specified
   function checkWin (rowIndex, colIndex, direction) {
     var adjustFirstArr = 0
     var adjustSecondArr = 0
@@ -87,75 +151,71 @@ $(document).ready(function () {
       }
     }
 
+    // If win, end game. If not, proceed to move part 2
     if (totalMatches === 4) {
-      $headerTwo.text(player + ', u r ' + direction + ' winna')
-      scoreBoard[player] += 1
-      updateScoreBoard()
-      // resetBoard()
+      scoreBoard[playerMove + 'set'] = true
+    } else {
+      prepMoveB()
     }
   }
 
-  // Checks win condition for all directions for that particular tile
+  function checkTie () {
+    var gameSquareFilled = 0
+    for (var i = 0; i < $allGameSquare.length; i++) {
+      if ($('.game-square').eq(i).hasClass('X') || $('.game-square').eq(i).hasClass('O')) {
+        gameSquareFilled += 1
+      }
+    }
+    if (gameSquareFilled === 36 && !scoreBoard.roundEnd) {
+      scoreBoard.ties += 1
+      scoreBoard.winner = 'Tie'
+      $('.alert-message').text("It's a tie!")
+      updateScoreBoard()
+      freezeFrame()
+      togglePlayerIfTie()
+    }
+  }
+
+  // Consolidates win conditions in one function
   function checkAllWin (thisRow, thisCol) {
     checkWin(thisRow, thisCol, 'vertical')
     checkWin(thisRow, thisCol, 'horizontal')
     checkWin(thisRow, thisCol, 'upDiagonal')
     checkWin(thisRow, thisCol, 'downDiagonal')
+    checkTie()
   }
 
-  // function checkTie () {
-  //   gameBoardFull = true
-  //   for (var i = 0; i < $allGameSquare.length; i++) {
-  //     if ($('.game-square').eq(i).hasClass('X') || $('.game-square').eq(i).hasClass('O')) {
-  //       gameBoardFull = false
-  //     }
-  //   }
-  //   if (!gameBoardFull) {
-  //     $headerTwo.text('TIETIETIE')
-  //   }
-  // }
-
-
-  // Specifies behaviour on player making a move
+  // On player click, if populated, populates gameBoard and game-tiles with values. After that, check win condition for that particular entry.
   function playerMove () {
     // If cell is populated
-    if (!$(this).hasClass('X') && !$(this).hasClass('O')) {
-
+    $this = $(this)
+    if (!$this.hasClass('X') && !$this.hasClass('O')) {
       // Gets rows and col index from HTML divs
       var thisRow = Number($(this).data('row'))
       var thisCol = Number($(this).data('col'))
 
-      // Assigns player value to gameBoard array
+      // Assigns player value to gameBoard array and HTML
       gameBoard[thisRow][thisCol] = player
-
-      // Adds class to clicked div
       $(this).addClass(player)
 
       // Checks win condition for clicked cell
       checkAllWin(thisRow, thisCol)
 
-      $('.rotate-btn').show()
-
-      // Change player
-      if (player === 'X') {
-        player = 'O'
-      } else {
-        player = 'X'
+      if (scoreBoard[player + 'set'] === true) {
+        scoreBoard[player] += 1
+        if (player === 'X') {
+          $('.alert-message').text("Player 1 wins!")
+        } else if (player === 'O') {
+          $('.alert-message').text("Player 2 wins!")
+        }
+        togglePlayer()
+        scoreBoard.initiator = player
+        scoreBoard.winner = player
+        updateScoreBoard()
+        freezeFrame()
       }
     }
   }
-
-  $allGameSquare.on('click', playerMove)
-
-  $allGameSquare.hover(
-    // $(this).toggleClass('hover' + player)
-    function () {
-      $(this).addClass('hover' + player)
-    },
-    function () {
-      $(this).removeClass('hoverX hoverO')
-    }
-  )
 
   // Assigns rotate tile function to each button, calling the closure with the appropriate board
   for (var i = 0; i < 4; i++) {
@@ -169,7 +229,7 @@ $(document).ready(function () {
     $rotateLeftBtn.on('click', rotateTileIndex)
   }
 
-  // Rotates board, stores as closure with corresponding starting coordinates
+  // For specified board and rotate direction, creates a closure function for rotation behaviour
   function rotateBoard (boardIndex, rotateDirection) {
     var x = 0
     var y = 0
@@ -252,10 +312,40 @@ $(document).ready(function () {
           // counter to loop through the gameSquareTile array
           counter += 1
 
-          $('.rotate-btn').hide()
-
           checkAllWin(i, j)
         }
+      }
+
+      // Verifying win and tie condition after win condition has been checked for entire tile
+      // Toggles player for each situation
+      if (scoreBoard.Xset && scoreBoard.Oset) {
+        scoreBoard.ties += 1
+        scoreBoard.roundEnd = true
+        scoreBoard.winner = 'Tie'
+        $('.alert-message').text("It's a tie!")
+        togglePlayerIfTie()
+      } else if (scoreBoard.Xset && !scoreBoard.Oset) {
+        scoreBoard.X += 1
+        scoreBoard.roundEnd = true
+        scoreBoard.winner = 'X'
+        $('.alert-message').text('Player 1 wins!')
+        player = 'O'
+        scoreBoard.initiator = player
+      } else if (!scoreBoard.Xset && scoreBoard.Oset) {
+        scoreBoard.O += 1
+        scoreBoard.roundEnd = true
+        scoreBoard.winner = 'O'
+        $('.alert-message').text('Player 2 wins!')
+        player = 'X'
+        scoreBoard.initiator = player
+      } else {
+        prepMoveA()
+        togglePlayer()
+      }
+
+      if (scoreBoard.roundEnd) {
+        freezeFrame()
+        updateScoreBoard()
       }
     }
     return updateTileValues
@@ -267,43 +357,36 @@ $(document).ready(function () {
     $('.tie-score').text(scoreBoard.ties)
   }
 
-  function resetBoard () {
-    $allGameSquare.removeClass('X')
-    $allGameSquare.removeClass('O')
-    gameBoard = [
-                      ['', '', '', '', '', ''],
-                      ['', '', '', '', '', ''],
-                      ['', '', '', '', '', ''],
-                      ['', '', '', '', '', ''],
-                      ['', '', '', '', '', ''],
-                      ['', '', '', '', '', '']
-    ]
-  }
-
   function fullReset () {
-    resetBoard()
+    gameBoardInit()
     for (var x in scoreBoard) {
       scoreBoard[x] = 0
     }
     updateScoreBoard()
   }
 
-  $('.reset-btn').on('click', resetBoard)
+  function togglePlayer () {
+    if (player === 'X') {
+      player = 'O'
+    } else {
+      player = 'X'
+    }
+  }
 
-  // Remaining things to do:
-  // Tier 1:
-  // 1) Disabling player input after each move, forcing them to rotate.
-    // Create a variable that toggles, allow the function to go through depending on variable?
-  // 2) Tie condition - scoreBoard
-  // 3) Notification? Next game? Potentially so they can analyse the board
-  // 4) Game init - Initiate game with no buttons visible
-  //
+  function togglePlayerIfTie () {
+    if (scoreBoard.initiator === 'X') {
+      player = 'O'
+      scoreBoard.initiator = player
+    } else {
+      player = 'X'
+      scoreBoard.initiator = player
+    }
+  }
+
   // Tier 2:
   // 1) Reorganise code and see where you forgot to define jquery variables
   //
   // Tier 3:
   // 1) Rotation animation
   // 2) Change picture of winning tiles
-  // 3) Strategy tips
-
 })
