@@ -1,6 +1,6 @@
 h1 {
   text-align: center;
-  font-size: 40px
+  margin: 10px;
 }
 
 button {
@@ -13,45 +13,42 @@ div {
 }
 
 body {
-  width: 900px;
-  height: 900px;
-  border: 1px solid black;
+  width: 600px;
+  height: 600px;
   margin: 0 auto;
 }
 
-.left-container {
-  height: 50%;
-  width: 50%;
-  border: 3px solid black;
-  margin: 0 5%;
-  float: left;
+.game-board-container {
+  height: 65%;
+  width: 65%;
+  margin: 0 auto;
 }
 
 .right-container {
-  width: 40%;
-  float: left;
+  width: 100%;
 
 }
 
 .game-board {
   height: 80%;
   width: 80%;
-  border: 3px solid black;
   margin: 0 auto;
   float: left;
-  /*background-image: url('https://farm4.staticflickr.com/3086/2705644192_7421d4a9ef_b.jpg');
+  /*background-image: url('http://www.wood-database.com/wp-content/uploads/white-oak.jpg');
   background-size: cover;*/
 }
 
 .game-tile {
-  border: 1px solid red;
+  border: 1px solid black;
   height: 50%;
   width: 50%;
   float: left;
+  background-image: url('http://www.wood-database.com/wp-content/uploads/white-oak.jpg');
+  background-size: cover;
 }
 
 .game-square {
-  border: 1px solid green;
+  border: 1px solid rgb(77, 52, 24);
   height: 33.33%;
   width: 33.33%;
   float: left;
@@ -83,33 +80,31 @@ body {
   position: relative;
 }
 
-.top-btn, .bottom-btn, .left-btn, .right-btn {
-    background-color: grey;
-}
-
 .X {
-  background-image: url('http://previews.123rf.com/images/lehui/lehui1412/lehui141200027/34772741-Art-watercolor-blue-circle-paint-stain-isolated-on-white-rough-texture-paper-background-with-clippin-Stock-Photo.jpg');
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475466092/circle_blue_nobackground_h8kgjz.png');
   background-size: cover;
 
 }
 
 .O {
-  background-image: url('http://previews.123rf.com/images/irrrina/irrrina1406/irrrina140600528/29422949-Black-brush-circle-Drawing-created-in-ink-sketch-handmade-technique-Blank-abstract-textured-round-sh-Stock-Photo.jpg');
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475466086/circle_black_nobackground_cwyoqw.png');
   background-size: cover;
 }
 
 .hoverX {
-  background-image: url('http://previews.123rf.com/images/lehui/lehui1412/lehui141200027/34772741-Art-watercolor-blue-circle-paint-stain-isolated-on-white-rough-texture-paper-background-with-clippin-Stock-Photo.jpg');
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475466092/circle_blue_nobackground_h8kgjz.png');
   background-size: cover;
 }
 
 .hoverO {
-  background-image: url('http://previews.123rf.com/images/irrrina/irrrina1406/irrrina140600528/29422949-Black-brush-circle-Drawing-created-in-ink-sketch-handmade-technique-Blank-abstract-textured-round-sh-Stock-Photo.jpg');
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475466086/circle_black_nobackground_cwyoqw.png');
   background-size: cover;
 }
 
 .scoreboard {
-  margin: 0 auto;
+  margin: 20px auto;
+  width: 100%;
+
 }
 
 .score-container {
@@ -118,18 +113,29 @@ body {
   box-sizing: border-box;
   text-align: center;
   border: 2px solid black;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.score-container h3 {
+  margin: 5px 0;
+}
+
+.score-container p {
+  margin: 5px 0;
 }
 
 .alert-message-container {
-  /*width: ;*/
-  height: 100px;
-  width: 100%;
+  height: 70px;
+  width: 50%;
   clear: both;
-  margin: 0 auto 30px auto;
+  margin: 10px auto;
   font-size: 20px;
   text-align: center;
   border: 1px solid black;
+}
+
+.alert-message {
+  margin: 5px 0;
 }
 
 .next-game-btn {
@@ -139,14 +145,40 @@ body {
   margin: 0 auto;
 }
 
-.reset-btn {
-  clear: both;
+.admin-btn-container {
+    width: 65%;
+    margin: 0 auto;
+    /*border: 2px solid black;*/
+}
+
+.admin-btn {
   text-align: center;
-  border: 4px solid black;
-  margin: 0 auto;
-  width: 100px;
-  height: 50px;
+  border: 2px solid black;
+  margin: 0 7.5%;
+  width: 35%;
+  padding: 5px;
+  /*height: 50px;*/
   font-size: 20px;
+  float: left;
+}
+
+.instructions {
+  position: absolute;
+  top: 0;
+  height: 700px;
+  width: 600px;
+  padding: 50px 100px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.close-instructions {
+    width: 30%;
+    margin: 10px auto;
+    text-align: center;
+    border: 1px solid black;
 }
 
 .instructions h3 {
@@ -180,4 +212,45 @@ body {
   float: right;
   height: 100%;
   width: 25%;
+}
+
+#rotate-right0 {
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472965/top-right-arrow_mng56q.png');
+  background-size: cover;
+}
+
+#rotate-right1 {
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472969/right-bottom-arrow_vdbhar.png');
+  background-size: cover;
+}
+
+#rotate-right2 {
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472979/left-top-arrow_oqxwvt.png');
+  background-size: cover;
+}
+
+#rotate-right3 {
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472973/bottom-left-arrow_zjhie6.png');
+  background-size: cover;
+}
+
+
+#rotate-left0 {
+  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472975/left-bottom-arrow_z7cxni.png');
+  background-size: cover;
+}
+
+#rotate-left1 {
+    background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472964/top-left-arrow_fmin00.png');
+  background-size: cover;
+}
+
+#rotate-left2 {
+    background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472971/bottom-right-arrow_cezzwv.png');
+  background-size: cover;
+}
+
+#rotate-left3 {
+    background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472966/right-top-arrow_e5olkk.png');
+  background-size: cover;
 }

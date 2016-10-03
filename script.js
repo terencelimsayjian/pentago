@@ -28,6 +28,22 @@ $(document).ready(function () {
 
   $('.next-game-btn').on('click', gameBoardInit)
 
+  $('.instructions-btn').on('click', function () {
+    $('.instructions').toggle()
+  })
+
+  $('.close-instructions').on('click', function () {
+      $('.instructions').hide()
+  })
+
+  function toggleNextGameBtn () {
+    if (scoreBoard.roundEnd) {
+      $('.next-game-btn').show()
+    } else {
+      $('.next-game-btn').hide()
+    }
+  }
+
   function gameBoardInit () {
     $allGameSquare.removeClass('X')
     $allGameSquare.removeClass('O')
@@ -41,6 +57,7 @@ $(document).ready(function () {
     ]
     scoreBoard.roundEnd = false
     prepMoveA()
+    toggleNextGameBtn()
     scoreBoard.Xset = false
     scoreBoard.Oset = false
   }
@@ -152,7 +169,7 @@ $(document).ready(function () {
     }
 
     // If win, end game. If not, proceed to move part 2
-    if (totalMatches === 4) {
+    if (totalMatches >= 4) {
       scoreBoard[playerMove + 'set'] = true
     } else {
       prepMoveB()
@@ -173,6 +190,7 @@ $(document).ready(function () {
       updateScoreBoard()
       freezeFrame()
       togglePlayerIfTie()
+      toggleNextGameBtn()
     }
   }
 
@@ -205,14 +223,17 @@ $(document).ready(function () {
         scoreBoard[player] += 1
         if (player === 'X') {
           $('.alert-message').text("Player 1 wins!")
+          scoreBoard.roundEnd = true
         } else if (player === 'O') {
           $('.alert-message').text("Player 2 wins!")
+          scoreBoard.roundEnd = true
         }
         togglePlayer()
         scoreBoard.initiator = player
         scoreBoard.winner = player
         updateScoreBoard()
         freezeFrame()
+        toggleNextGameBtn()
       }
     }
   }
@@ -347,6 +368,7 @@ $(document).ready(function () {
         freezeFrame()
         updateScoreBoard()
       }
+      toggleNextGameBtn()
     }
     return updateTileValues
   }
@@ -383,9 +405,6 @@ $(document).ready(function () {
     }
   }
 
-  // Tier 2:
-  // 1) Reorganise code and see where you forgot to define jquery variables
-  //
   // Tier 3:
   // 1) Rotation animation
   // 2) Change picture of winning tiles
