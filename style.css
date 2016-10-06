@@ -1,6 +1,20 @@
 h1 {
   text-align: center;
-  margin: 10px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-family: 'Signika', sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+}
+
+h3, li {
+  font-family: 'Signika', sans-serif;
+}
+
+p, .admin-btn {
+  font-family: 'Signika', sans-serif;
+  font-weight: bold;
+  /*font-size: 1.2em;*/
 }
 
 button {
@@ -16,104 +30,72 @@ body {
   width: 600px;
   height: 600px;
   margin: 0 auto;
-}
-
-.game-board-container {
-  height: 65%;
-  width: 65%;
-  margin: 0 auto;
-}
-
-.right-container {
-  width: 100%;
-
-}
-
-.game-board {
-  height: 80%;
-  width: 80%;
-  margin: 0 auto;
-  float: left;
-  /*background-image: url('http://www.wood-database.com/wp-content/uploads/white-oak.jpg');
-  background-size: cover;*/
-}
-
-.game-tile {
-  border: 1px solid black;
-  height: 50%;
-  width: 50%;
-  float: left;
-  background-image: url('http://www.wood-database.com/wp-content/uploads/white-oak.jpg');
+  background-image: url('wood_background.jpg');
   background-size: cover;
 }
 
-.game-square {
-  border: 1px solid rgb(77, 52, 24);
-  height: 33.33%;
-  width: 33.33%;
-  float: left;
-  font-size: 60px;
-  font-weight: bold;
+.alert-message-container p {
+  padding-top: 5px;
+}
+
+.alert-message-container, .score-container, .admin-btn {
+  background-color: white;
+  opacity: 0.85;
+  border-radius: 5px;
+}
+
+.score-container {
+  background-color: grey;
+}
+
+.alert-message-container {
+  height: 40px;
+  width: 50%;
+  clear: both;
+  margin: 10px auto;
+  font-size: 20px;
   text-align: center;
 }
 
-.rotate-btn {
-
+.alert-message {
+  margin: 5px 0;
 }
 
-.top-btn-container, .bottom-btn-container {
-  height: 10%;
-  width: 80%;
+.next-game-btn {
+  background-color: white;
+  width: 50%;
   margin: 0 auto;
-  /*text-align: center;*/
-}
-
-.top-btn, .bottom-btn {
-  display: block;
-}
-
-.left-btn-container, .right-btn-container {
-  float: left;
-  height: 80%;
-  width: 10%;
-  margin: auto 0;
   position: relative;
-}
-
-.X {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475466092/circle_blue_nobackground_h8kgjz.png');
-  background-size: cover;
-
-}
-
-.O {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475466086/circle_black_nobackground_cwyoqw.png');
-  background-size: cover;
-}
-
-.hoverX {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475466092/circle_blue_nobackground_h8kgjz.png');
-  background-size: cover;
-}
-
-.hoverO {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475466086/circle_black_nobackground_cwyoqw.png');
-  background-size: cover;
+  top: 12px;
 }
 
 .scoreboard {
   margin: 20px auto;
   width: 100%;
-
 }
 
 .score-container {
-  width: 33.33%;
+  width: 31.33%;
+  margin: 0 1%;
   float: left;
   box-sizing: border-box;
   text-align: center;
-  border: 2px solid black;
   margin-bottom: 20px;
+}
+
+.score-container:first-child {
+  background-image: url('white_dot.png');
+  background-size: cover;
+  background-position: center;
+  background-color: transparent;
+}
+
+.score-container:last-child {
+  background-image: url('black_dot.png');
+  background-size: cover;
+  background-position: center;
+  background-color: transparent;
+  color: white;
 }
 
 .score-container h3 {
@@ -122,42 +104,25 @@ body {
 
 .score-container p {
   margin: 5px 0;
+  font-size: 1.2em;
 }
 
-.alert-message-container {
-  height: 70px;
-  width: 50%;
-  clear: both;
-  margin: 10px auto;
-  font-size: 20px;
-  text-align: center;
-  border: 1px solid black;
-}
-
-.alert-message {
-  margin: 5px 0;
-}
-
-.next-game-btn {
-  border: 1px solid black;
-  background-color: grey;
-  width: 50%;
-  margin: 0 auto;
+.score-container img {
+  height: 100%;
+  width: 100%;
+  float: right;
 }
 
 .admin-btn-container {
     width: 65%;
     margin: 0 auto;
-    /*border: 2px solid black;*/
 }
 
 .admin-btn {
   text-align: center;
-  border: 2px solid black;
   margin: 0 7.5%;
   width: 35%;
   padding: 5px;
-  /*height: 50px;*/
   font-size: 20px;
   float: left;
 }
@@ -165,8 +130,8 @@ body {
 .instructions {
   position: absolute;
   top: 0;
-  height: 700px;
-  width: 600px;
+  height: 100%;
+  width: 100%;
   padding: 50px 100px;
   left: 0;
   right: 0;
@@ -188,6 +153,97 @@ body {
 .instructions p {
   text-align: justify;
   padding: 5px;
+}
+
+.game-board-container {
+  height: 65%;
+  width: 65%;
+  margin: 0 auto;
+}
+
+.right-container {
+  width: 100%;
+
+}
+
+.game-board {
+  height: 80%;
+  width: 80%;
+  margin: 0 auto;
+  float: left;
+}
+
+.game-tile {
+  border: 1px solid rgb(255, 255, 255);
+  height: 50%;
+  width: 50%;
+  float: left;
+  background-color: grey;
+  opacity: 0.9;
+  border-radius: 5px;
+}
+
+.rotate-tile-right {
+  transition: all 0.8s ease;
+  transform: rotate(90deg);
+}
+
+.rotate-tile-left {
+  transition: all 0.8s ease;
+  transform: rotate(-90deg);
+}
+
+.game-square {
+  border: 0.5px solid rgb(179, 181, 177);
+  height: 33.33%;
+  width: 33.33%;
+  float: left;
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.top-btn-container, .bottom-btn-container {
+  height: 10%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.top-btn, .bottom-btn {
+  display: block;
+}
+
+.left-btn-container, .right-btn-container {
+  float: left;
+  height: 80%;
+  width: 10%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.X, .O, .hoverX, .hoverO {
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.X {
+  background-image: url('white_dot.png');
+}
+
+.O {
+  background-image: url('black_dot.png');
+}
+
+.hoverX {
+  background-image: url('white_dot.png');
+  opacity: 0.75;
+}
+
+.hoverO {
+  background-image: url('black_dot.png');
+  opacity: 0.55;
 }
 
 #rotate-right0, #rotate-left2 {
@@ -215,42 +271,41 @@ body {
 }
 
 #rotate-right0 {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472965/top-right-arrow_mng56q.png');
+  background-image: url('top-left-arrow.png');
   background-size: cover;
 }
 
 #rotate-right1 {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472969/right-bottom-arrow_vdbhar.png');
+  background-image: url('right-top-arrow.png');
   background-size: cover;
 }
 
 #rotate-right2 {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472979/left-top-arrow_oqxwvt.png');
+  background-image: url('left-bottom-arrow.png');
   background-size: cover;
 }
 
 #rotate-right3 {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472973/bottom-left-arrow_zjhie6.png');
+  background-image: url('bottom-right-arrow.png');
   background-size: cover;
 }
 
-
 #rotate-left0 {
-  background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472975/left-bottom-arrow_z7cxni.png');
+  background-image: url('left-top-arrow.png');
   background-size: cover;
 }
 
 #rotate-left1 {
-    background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472964/top-left-arrow_fmin00.png');
+  background-image: url('top-right-arrow.png');
   background-size: cover;
 }
 
 #rotate-left2 {
-    background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472971/bottom-right-arrow_cezzwv.png');
+  background-image: url('bottom-left-arrow.png');
   background-size: cover;
 }
 
 #rotate-left3 {
-    background-image: url('http://res.cloudinary.com/littletinyhippo/image/upload/v1475472966/right-top-arrow_e5olkk.png');
+  background-image: url('right-bottom-arrow.png');
   background-size: cover;
 }
