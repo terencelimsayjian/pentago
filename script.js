@@ -30,11 +30,11 @@ $(document).ready(function () {
   $('.next-game-btn').on('click', gameBoardInit)
 
   $('.instructions-btn').on('click', function () {
-    $('.instructions').toggle()
+    $('.instructions-container').toggle()
   })
 
   $('.close-instructions').on('click', function () {
-      $('.instructions').hide()
+    $('.instructions-container').hide()
   })
 
   function toggleNextGameBtn () {
@@ -237,10 +237,10 @@ $(document).ready(function () {
       if (scoreBoard[player + 'set'] === true) {
         scoreBoard[player] += 1
         if (player === 'X') {
-          $('.alert-message').text("Player 1 wins!")
+          $('.alert-message').text('Player 1 wins!')
           scoreBoard.roundEnd = true
         } else if (player === 'O') {
-          $('.alert-message').text("Player 2 wins!")
+          $('.alert-message').text('Player 2 wins!')
           scoreBoard.roundEnd = true
         }
         togglePlayer()
@@ -331,8 +331,11 @@ $(document).ready(function () {
         $(gameTileID).addClass('rotate-tile-left')
       }
 
+      // Added to smoothen out transition animation
+      $('.rotate-btn').hide()
+
       // Function to execute after visual rotation
-      window.setTimeout(unRotate, 1000)
+      window.setTimeout(unRotate, 800)
 
       function unRotate () {
         // Removes rotated class
@@ -363,7 +366,6 @@ $(document).ready(function () {
             counter += 1
             checkAllWin(i, j)
           }
-          console.log(gameBoard)
         }
 
       // Verifying win and tie condition after win condition has been checked for entire tile

@@ -3,18 +3,19 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Dosis|Roboto|Signika" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis|Roboto|Signika|Oswald|Cabin" rel="stylesheet">
   </head>
   <body>
-    <h1>PENTAGO</h1>
+    <h1>Pentago</h1>
     <div class="alert-message-container">
       <p class="alert-message"></p>
-      <div class="next-game-btn">Next Game</div>
+      <!-- <div class="next-game-btn"><p>Next Game</p></div> -->
     </div>
     <div class="game-board-container">
 
     <div class="top-btn-container">
       <div class="rotate-btn top-btn" id="rotate-right0"></div>
+      <div class="next-game-btn"><p>Next Game</p></div>
       <div class="rotate-btn top-btn" id="rotate-left1"></div>
     </div>
 
@@ -98,19 +99,21 @@
         </div>
       </div>
       <div class="admin-btn-container">
-        <div class="admin-btn reset-btn">Reset</div>
-        <div class="admin-btn instructions-btn">Instructions</div>
+        <div class="admin-btn reset-btn"><p>Reset</p></div>
+        <div class="admin-btn instructions-btn"><p>Instructions</p></div>
       </div>
-      <div class="instructions">
-        <h3>Instructions</h3>
-        <p>Each player's turn consists of two moves:</p>
-        <ol>
-          <li>Place a token.</li>
-          <li>Rotate a tile. A tile, not necessarily the one on which the token has been placed, must be turned.</li>
-        </ol>
-        <p>Then the next player takes his turn. The first player to get five tokens in a row wins! The row can be horizontal, vertical, or diagonal.</p>
-        <p>If all sockets have been filled without any player getting five in a row the game is a draw. If both players get five in a row as a player turns a board, the game is also a draw.</p>
-        <div class="close-instructions">To Game</div>
+      <div class="instructions-container">
+        <div class="instructions">
+          <h3>Instructions</h3>
+          <p>Each player's turn consists of two moves:</p>
+          <ol>
+            <li>Place a token.</li>
+            <li>Rotate any tile.</li>
+          </ol>
+          <p>Then the next player takes his turn. The first player to get five tokens in a row wins! The row can be horizontal, vertical, or diagonal.</p>
+          <p>If all sockets have been filled without any player getting five in a row the game is a draw. If both players get five in a row as a player turns a board, the game is also a draw.</p>
+          <div class="close-instructions"><p>To Game</p></div>
+        </div>
       </div>
     </div>
 
