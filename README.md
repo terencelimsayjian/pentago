@@ -11,6 +11,7 @@ Features of my game:
 (2) Keeps track of wins, losses, and ties
 (3) Global reset button to start a new game
 (4) Visual aids including board rotation, token and, arrow hovering
+(5) Mobile responsive
 
 Key algorithms:
 (1) Win condition - Searches neighbours of a particular cell a particular direction and counts the number of matches
