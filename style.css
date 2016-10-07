@@ -157,8 +157,7 @@ body {
   left: 0;
   right: 0;
   margin: 0 auto;
-  /*background-color: white;*/
-  background-image: url('grey-gradient-background.jpg');
+  background: linear-gradient(white, grey);
 }
 
 .instructions {
@@ -276,7 +275,7 @@ body {
 
 .hoverX {
   background-image: url('white_dot.png');
-  opacity: 0.75;
+  opacity: 0.65;
 }
 
 .hoverO {
