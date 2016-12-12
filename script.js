@@ -364,6 +364,11 @@ $(document).ready(function () {
             }
             // counter to loop through the gameSquareTile array
             counter += 1
+          }
+        }
+
+        for (var i = x; i < x + 3; i++) {
+          for (var j = y; j < y + 3; j++) {
             checkAllWin(i, j)
           }
         }
